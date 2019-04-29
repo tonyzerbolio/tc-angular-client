@@ -1,0 +1,30 @@
+<div class="container custom-container-2">
+
+  <!-- Employees list table, it hides when there is no employee -->
+  <div *ngIf="Customer.length !== 0">
+    <h3 class="mb-3 text-center">Customers List</h3>
+
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">User Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Pesel</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of Customer">
+            <td>{{customer.id}}</td>
+            <td>{{customer.name}}</td>
+            <td>{{customer.pesel}}</td>
+            <td>{{customer.type}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
