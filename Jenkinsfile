@@ -22,7 +22,7 @@ volumes: [
             def regURL = "registry-sonatype-nexus.pipeline:8081/docker-internal"
             def regNamespace = "paruff"
             def artifactID = sh(script: "jq -r '.name' package.json", returnStdout: true)
-            def APPversion = sh(script: "jq -r ".version" package.json", returnStdout: true)
+            def APPversion = sh(script: "jq -r '.version' package.json", returnStdout: true)
             
 
             stage('Build Angular Project') {
