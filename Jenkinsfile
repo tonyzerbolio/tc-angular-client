@@ -61,7 +61,7 @@ volumes: [
           sh """
             docker login -u ${DOCKER_REG_USER}  -p ${DOCKER_REG_PASSWORD}
             docker build -t ${regNamespace}/${artifactID} .
-            docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${POMversion}.${shortGitCommit}
+            docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${shortGitCommit}
             echo $gitBranch
             echo $branchName
             if [ ${gitBranch} == "origin/master" ] ; then
