@@ -1,4 +1,8 @@
-# Client
+# REST Services Wire-Up
+
+Open `src/app/shared/rest-api.service.ts` and update the `apiUrl` with the URL of your REST Service
+
+## Client
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 

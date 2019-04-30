@@ -9,7 +9,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class RestApiService {
 
-   // Define API
+   // Define API - REST Service URL
    apiURL = 'http://localhost:8090';
 
   constructor(private http: HttpClient) { }
