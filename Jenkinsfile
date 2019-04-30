@@ -18,6 +18,12 @@ volumes: [
             def gitBranch = myRepo.GIT_BRANCH
             def shortGitCommit = "${gitCommit[0..10]}"
             def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
+          def gitCommitCount = sh(script: "git rev-list --all --count", returnStdout: true)
+            def regURL = "registry-sonatype-nexus.pipeline:8081/docker-internal"
+            def regNamespace = "paruff"
+            def artifactID = sh(script: "grep '<artifactId>' pom.xml | head -n 1 | sed -e 's/artifactId//g' | sed -e 's/\\s*[<>/]*//g' | tr -d '\\r\\n'", returnStdout: true)
+            def POMversion = sh(script: "grep '<version>' pom.xml | head -n 1 | sed -e 's/version//g' | sed -e 's/\\s*[<>/]*//g' | tr -d '\\r\\n'", returnStdout: true)
+          
 
             stage('Build Angular Project') {
                 checkout scm
