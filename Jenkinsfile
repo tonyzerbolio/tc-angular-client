@@ -31,6 +31,7 @@ volumes: [
 
                     stage('Install Node Packages') {
                         sh 'npm install'
+                        sh 'npm install -g @angular/cli'
                     }
 
                 //    stage('Run Angular Lint') {
