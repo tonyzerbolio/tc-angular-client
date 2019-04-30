@@ -5,8 +5,7 @@ podTemplate(label: label, containers: [
     containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
     ],
 volumes: [
-    hostPathVolume(mountPath: '/root/.m2/repository', hostPath: '/root/.m2/repository'),
-    hostPathVolume(mountPath: '/home/jenkins/.m2', hostPath: '/home/jenkins/.m2'),
+    hostPathVolume(mountPath: '/home/jenkins/nodedist', hostPath: '/home/jenkins/nodedist'),
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
     node(label) {
@@ -41,6 +40,7 @@ volumes: [
 
                     stage('Build') {
                         sh 'npm build'
+                      sh 'cp dist/* /home/jenkins/nodedist/'
                     }
 
                   
@@ -60,6 +60,8 @@ volumes: [
            usernameVariable: 'DOCKER_REG_USER',
            passwordVariable: 'DOCKER_REG_PASSWORD']]) {
           sh """
+            mkdir -p dist
+            cp /home/jenkins/nodedist/* dist/*
             docker login -u ${DOCKER_REG_USER}  -p ${DOCKER_REG_PASSWORD}
             docker build -t ${regNamespace}/${artifactID} .
             docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${shortGitCommit}
