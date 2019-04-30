@@ -33,9 +33,9 @@ volumes: [
                         sh 'npm install'
                     }
 
-                    stage('Run Angular Lint') {
-                        sh 'ng lint'
-                    }
+                //    stage('Run Angular Lint') {
+                //        sh 'ng lint'
+                //    }
 
                     stage('Build') {
                         sh 'ng build --prod'
