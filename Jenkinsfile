@@ -47,9 +47,9 @@ volumes: [
                  //       sh 'npm run ng test'
                  //   }
                   
-                    stage('SonarQube Analysis Angular') {
-                        sh 'npm run sonar'
-                    }                            
+                  //  stage('SonarQube Analysis Angular') {
+                  //      sh 'npm run sonar'
+                  //  }                            
                 }
             }
             stage('Create Docker images') {
