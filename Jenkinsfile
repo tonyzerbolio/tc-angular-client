@@ -21,8 +21,8 @@ volumes: [
           def gitCommitCount = sh(script: "git rev-list --all --count", returnStdout: true)
             def regURL = "registry-sonatype-nexus.pipeline:8081/docker-internal"
             def regNamespace = "paruff"
-            def artifactID = sh(script: "grep '<artifactId>' pom.xml | head -n 1 | sed -e 's/artifactId//g' | sed -e 's/\\s*[<>/]*//g' | tr -d '\\r\\n'", returnStdout: true)
-            def POMversion = sh(script: "grep '<version>' pom.xml | head -n 1 | sed -e 's/version//g' | sed -e 's/\\s*[<>/]*//g' | tr -d '\\r\\n'", returnStdout: true)
+            def artifactID = sh(script: "grep name package.json | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'| tr -d '[[:space:]]')", returnStdout: true)
+            def APPversion = sh(script: "grep version package.json | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'| tr -d '[[:space:]]')", returnStdout: true)
           
 
             stage('Build Angular Project') {
@@ -65,11 +65,11 @@ volumes: [
             echo $gitBranch
             echo $branchName
             if [ ${gitBranch} == "origin/master" ] ; then
-                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${POMversion}.${gitCommitCount}
-                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${POMversion}.${BUILD_NUMBER}
+                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${gitCommitCount}
+                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${BUILD_NUMBER}
             else
-                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${branchName}-${POMversion}.${gitCommitCount}
-                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${branchName}-${POMversion}.${BUILD_NUMBER}
+                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${branchName}-${APPversion}.${gitCommitCount}
+                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${branchName}-${APPversion}.${BUILD_NUMBER}
             fi
             docker push ${regNamespace}/${artifactID}
             """
