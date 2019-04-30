@@ -21,7 +21,7 @@ volumes: [
           def gitCommitCount = sh(script: "git rev-list --all --count", returnStdout: true)
             def regURL = "registry-sonatype-nexus.pipeline:8081/docker-internal"
             def regNamespace = "paruff"
-            def artifactID = sh(script: "awk -F\" '/"name":/ {print \$4}' package.json", returnStdout: true)
+            def artifactID = sh(script: "jq -r '.name' package.json", returnStdout: true)
             def APPversion = sh(script: "awk -F\" '/"version":/ {print \$4}' package.json", returnStdout: true)
             
 
