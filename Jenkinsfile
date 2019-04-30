@@ -22,8 +22,8 @@ volumes: [
           def gitCommitCount = sh(script: "git rev-list --all --count", returnStdout: true)
             def regURL = "registry-sonatype-nexus.pipeline:8081/docker-internal"
             def regNamespace = "paruff"
-            def artifactID = sh(script: "grep -m1 name package.json | awk -F: '{ print \$2 }' | sed 's/[\", ]//g'", returnStdout: true)
-            def APPversion = sh(script: "grep -m1 version package.json | awk -F: '{ print \$2 }' | sed 's/[\", ]//g'", returnStdout: true)
+            def artifactID = sh(script: "grep -m1 name package.json | awk -F: '{ print \$2 }' | sed 's/[\", ]//g' | tr -d '\\r\\n'", returnStdout: true)
+            def APPversion = sh(script: "grep -m1 version package.json | awk -F: '{ print \$2 }' | sed 's/[\", ]//g' | tr -d '\\r\\n'", returnStdout: true)
             
 
             stage('Build Angular Project') {
