@@ -24,6 +24,6 @@ RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-FROM nginx:1.15
+FROM nginx:stable-alpine
 COPY --from=build-stage /usr/src/app/dist/out/ /usr/share/nginx/html
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
