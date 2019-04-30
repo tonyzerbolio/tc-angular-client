@@ -16,6 +16,7 @@ volumes: [
             def myRepo = checkout scm
             def gitCommit = myRepo.GIT_COMMIT
             def gitBranch = myRepo.GIT_BRANCH
+          def branchName = sh(script: "echo $gitBranch | cut -c8-", returnStdout: true)
             def shortGitCommit = "${gitCommit[0..10]}"
             def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
           def gitCommitCount = sh(script: "git rev-list --all --count", returnStdout: true)
