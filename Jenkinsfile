@@ -34,7 +34,7 @@ volumes: [
                     }
 
                     stage('Run Angular Lint') {
-                        sh 'npx eslint'
+                        sh 'ng lint'
                     }
 
                     stage('Build') {
