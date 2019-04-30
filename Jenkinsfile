@@ -22,7 +22,7 @@ volumes: [
             def regURL = "registry-sonatype-nexus.pipeline:8081/docker-internal"
             def regNamespace = "paruff"
             def artifactID = sh(script: "grep -m1 name package.json | awk -F: '{ print \$2 }' | sed 's/[\", ]//g'", returnStdout: true)
-            def APPversion = sh(script: "jq -r '.version' package.json", returnStdout: true)
+            def APPversion = sh(script: "grep -m1 version package.json | awk -F: '{ print \$2 }' | sed 's/[\", ]//g'", returnStdout: true)
             
 
             stage('Build Angular Project') {
