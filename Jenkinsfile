@@ -38,7 +38,7 @@ volumes: [
                     }
 
                     stage('Build') {
-                        sh 'npm run ng -- build'
+                        sh 'ng build --prod'
                     }
 
                     stage('SonarQube Analysis Angular') {
