@@ -40,7 +40,7 @@ volumes: [
 
                     stage('Build') {
                         sh 'npm build'
-                      sh 'cp dist/* /home/jenkins/nodedist/'
+                  //    sh 'cp dist/* /home/jenkins/nodedist/'
                     }
 
                   
@@ -60,8 +60,6 @@ volumes: [
            usernameVariable: 'DOCKER_REG_USER',
            passwordVariable: 'DOCKER_REG_PASSWORD']]) {
           sh """
-            mkdir -p dist
-            cp /home/jenkins/nodedist/* dist/*
             docker login -u ${DOCKER_REG_USER}  -p ${DOCKER_REG_PASSWORD}
             docker build -t ${regNamespace}/${artifactID} .
             docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${shortGitCommit}
