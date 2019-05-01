@@ -40,7 +40,7 @@ volumes: [
                 //    }
 
                     stage('Build') {
-                        sh 'npm run ng build -- --prod --output-path=dist'
+                        sh 'npm run ng build --output-path=dist'
                   
                     }
 
