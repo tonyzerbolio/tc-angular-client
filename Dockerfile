@@ -1,5 +1,5 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile Angular
-FROM node:8.11.3 as build-stage
+FROM node:lts-alpine as build-stage
 
 # set working directory
 RUN mkdir /usr/src/app
