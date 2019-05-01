@@ -1,36 +1,34 @@
-# Stage 0, "build-stage", based on Node.js, to build and compile Angular
-FROM node:lts-alpine as build-stage
+### STAGE 1: Build ###
 
-# set working directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+# We label our stage as ‘builder’
+FROM node:10-alpine as builder
 
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /usr/src/app/package.json
-COPY package-lock.json /usr/src/app/package-lock.json
+COPY package.json package-lock.json ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm install
+
+RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
+
+WORKDIR /ng-app
+
+COPY . .
+
+## Build the angular app in production mode and store the artifacts in dist folder
+
+RUN npm run ng build -- --prod --output-path=dist
 
 
-# add app
-COPY . /usr/src/app
+### STAGE 2: Setup ###
 
-ARG configuration=production
-RUN npm run build -- --output-path=./dist/out --configuration $configuration
+FROM nginx:1.14.1-alpine
 
+## Copy our default nginx config
+COPY nginx/default.conf /etc/nginx/conf.d/
 
-# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-FROM nginx:1.15
-COPY --from=build-stage /usr/src/app/dist/out/ /usr/share/nginx/html
-COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
+## Remove default nginx website
+RUN rm -rf /usr/share/nginx/html/*
 
+## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
+COPY --from=builder /ng-app/dist /usr/share/nginx/html
 
-
-# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-# FROM nginx:stable-alpine
-# COPY dist/* /usr/share/nginx/html
-# COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
+CMD ["nginx", "-g", "daemon off;"]
