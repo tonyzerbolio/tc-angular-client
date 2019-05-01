@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestApiService } from "../../shared/rest-api.service";
+import { RestApiService } from '../../shared/rest-api.service';
 
 @Component({
   selector: 'app-customers-list',
@@ -15,14 +15,14 @@ export class CustomersListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadCustomers()
+    this.loadCustomers();
   }
 
   // Get customers list
   loadCustomers() {
     return this.restApi.getCustomers().subscribe((data: {}) => {
       this.Customer = data;
-    })
+    });
   }
 
 }
