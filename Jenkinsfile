@@ -39,7 +39,7 @@ volumes: [
                 //    }
 
                     stage('Build') {
-                        sh 'npm run build --output-path=./dist/out'
+                        sh 'npm run ng build -- --prod --output-path=dist'
                   //    sh 'cp dist/* /home/jenkins/nodedist/'
                     }
 
