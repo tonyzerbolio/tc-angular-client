@@ -7,11 +7,11 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
   imports: [
         CommonModule
     ],
-    declarations:[
+    declarations: [
         CustomersListComponent
     ],
     exports: [
-        CustomersListComponent  
+        CustomersListComponent
     ]
 })
 export class CustomersListModule { }
