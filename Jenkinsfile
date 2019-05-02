@@ -36,22 +36,29 @@ volumes: [
                     }
 
                     stage('Run Angular Lint') {
-                        sh 'ng lint'
+                        sh 'npm run lint'
                     }
 
-                    stage('Build') {
-                        sh 'npm run ng build --output-path=dist'
-                  
+                    stage('Run Unit Tests') {
+                        sh 'npm run cibuild'
                     }
 
+                    stage('Sonar Scanner') {
+                        sh 'npm run sonar'
+                    }
+
+                    // stage('Build') {
+                    //     sh 'npm run ng build --output-path=dist'
+                    // }
+
                   
-                 //   stage('Test') {
-                 //       sh 'npm run ng test'
-                 //   }
-                  
-                  //  stage('SonarQube Analysis Angular') {
-                  //      sh 'npm run sonar'
-                  //  }                            
+                    //   stage('Test') {
+                    //       sh 'npm run ng test'
+                    //   }
+                    
+                    //  stage('SonarQube Analysis Angular') {
+                    //      sh 'npm run sonar'
+                    //  }                            
                 }
             }
             stage('Create Docker images') {
