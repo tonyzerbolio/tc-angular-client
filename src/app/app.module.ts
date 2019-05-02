@@ -26,7 +26,7 @@ import { CustomersListComponent } from './customers-list/customers-list/customer
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
