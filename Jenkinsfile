@@ -32,20 +32,21 @@ volumes: [
 
                     stage('Install Node Packages') {
                         sh 'npm install'
-                        sh 'npm install -g @angular/cli'
                     }
 
                     stage('Run Angular Lint') {
                         sh 'npm run lint'
                     }
 
-                    stage('Run Unit Tests') {
-                        sh 'npm run cibuild'
-                    }
-
                     stage('Sonar Scanner') {
                         sh 'npm run sonar'
                     }
+
+                    stage('Build') {
+                        sh 'npm run build'
+                    }
+
+                    
 
                     // stage('Build') {
                     //     sh 'npm run ng build --output-path=dist'
