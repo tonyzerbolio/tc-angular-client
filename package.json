@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonar-scanner",
-    "cibuild": "ng test --single-run --cc && ng build --prod --no-progress"
+    "cibuild": "ng test --watch=false --code-coverage && ng build --prod --no-progress"
   },
   "private": true,
   "dependencies": {
