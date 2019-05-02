@@ -42,6 +42,10 @@ volumes: [
                         sh 'npm run sonar'
                     }
 
+                    stage('Run Karma Tests') {
+                        sh 'npm run cibuild'
+                    }
+
                     stage('Build') {
                         sh 'npm run build'
                     }
