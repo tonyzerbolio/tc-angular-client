@@ -12,19 +12,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
 // Components
-import { CustomersListComponent } from './customers-list/customers-list/customers-list.component';
+import { CustomersListModule } from './customers-list/customer-list.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CustomersListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CustomersListModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

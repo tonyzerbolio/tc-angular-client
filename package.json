@@ -1,15 +1,15 @@
 {
   "name": "client",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonar-scanner",
-    "cibuild": "ng test --watch=false --code-coverage && ng build --prod --no-progress"
+    "cibuild": "ng test --browsers PhantomJS_custom --watch=false --code-coverage && ng build --prod --no-progress"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "core-js": "^2.5.4",
+    "intl": "^1.2.5",
     "rxjs": "~6.3.3",
     "sonar-scanner": "^3.1.0",
     "tslib": "^1.9.0",
@@ -46,7 +47,9 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-spec-reporter": "0.0.32",
+    "phantomjs-prebuilt": "^2.1.16",
     "protractor": "~5.4.0",
     "sonarqube-scanner": "^2.4.0",
     "ts-node": "~7.0.0",
