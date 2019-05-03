@@ -37,13 +37,13 @@ volumes: [
                             sh 'npm run lint'
                         }
 
-                        stage('Sonar Scanner') {
-                            sh 'npm run sonar'
-                        }
-
                         stage('Run Karma Tests') {
                             sh 'npm run cibuild'
                         }
+
+                        stage('Sonar Scanner') {
+                            sh 'npm run sonar'
+                        }                        
 
                         stage('Build') {
                             sh 'npm run build'
