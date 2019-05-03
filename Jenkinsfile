@@ -8,7 +8,7 @@ podTemplate(label: label, containers: [
 volumes: [
     hostPathVolume(mountPath: '/home/jenkins/nodedist', hostPath: '/home/jenkins/nodedist'),
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
-    ])  {
+    ]) {
         node(label) {
             def myRepo = checkout scm
             def gitCommit = myRepo.GIT_COMMIT
