@@ -1,4 +1,7 @@
+import { RestApiService } from '../../shared/rest-api.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CustomersListComponent } from './customers-list.component';
 
@@ -8,7 +11,9 @@ describe('CustomersListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomersListComponent ]
+      declarations: [ CustomersListComponent ],
+      providers: [RestApiService],
+      imports: [HttpClientModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));
