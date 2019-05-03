@@ -20,6 +20,9 @@ module.exports = function (config) {
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../coverage/client'),
       reports: ['html', 'lcovonly', 'text-summary'],
+      fixWebpackSourcePaths: true,
+      skipFilesWithNoCoverage: true,
+      combineBrowserReports: true,
       fixWebpackSourcePaths: true//,
       // thresholds: {
       //   statements: 80,
@@ -28,7 +31,7 @@ module.exports = function (config) {
       //   functions: 80
       // }
     },
-    reporters: ['progress', 'kjhtml', 'spec'],
+    reporters: ['coverage-istanbul','progress', 'kjhtml', 'spec'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
