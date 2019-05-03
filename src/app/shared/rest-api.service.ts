@@ -23,7 +23,7 @@ export class RestApiService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }  
+  };
 
   // HttpClient API get() method => Fetch customers list
   getCustomers(): Observable<Customer> {
@@ -31,7 +31,7 @@ export class RestApiService {
     .pipe(
       retry(1),
       catchError(this.handleError)
-    )
+    );
   }
 
   // HttpClient API get() method => Fetch Customer
@@ -40,13 +40,13 @@ export class RestApiService {
     .pipe(
       retry(1),
       catchError(this.handleError)
-    )
-  }  
+    );
+  }
 
-  // Error handling 
+  // Error handling
   handleError(error) {
      let errorMessage = '';
-     if(error.error instanceof ErrorEvent) {
+     if (error.error instanceof ErrorEvent) {
        // Get client-side error
        errorMessage = error.error.message;
      } else {
