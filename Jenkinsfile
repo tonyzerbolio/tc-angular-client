@@ -33,8 +33,8 @@ volumes: [
                             sh 'npm install'
                         }
 
-                        stage('Run Dependency Check') {
-                            sh 'npm run dependency-check ./package.json --entry src/main.ts'
+                        stage('Run Security Check') {
+                            sh 'npm run audit'
                         }
 
                         stage('Run Angular Lint') {
