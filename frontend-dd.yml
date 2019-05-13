@@ -9,7 +9,7 @@ spec:
   ports:
   - protocol: "TCP"
     port: 80
-    targetPort: 8080
+    targetPort: 80
   type: LoadBalancer
 ---
 apiVersion: apps/v1
@@ -31,9 +31,16 @@ spec:
         track: stable
     spec:
       containers:
-      - name: nginx
-        image: "nginx"
+      - name: client
+        image: "paruff/client"
         lifecycle:
           preStop:
             exec:
               command: ["/usr/sbin/nginx","-s","quit"]
+        resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

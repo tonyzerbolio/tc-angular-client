@@ -69,9 +69,10 @@ volumes: [
                             if [ ${gitBranch} == "origin/master" ] ; then
                                 docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${gitCommitCount}
                                 docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${APPversion}.${BUILD_NUMBER}
-                            else
-                                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${branchName}-${APPversion}.${gitCommitCount}
-                                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${branchName}-${APPversion}.${BUILD_NUMBER}
+                            fi
+                            if [ ${gitBranch} == "origin/develop" ] ; then
+                                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:develop-${POMversion}.${gitCommitCount}
+                                docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:develop-${POMversion}.${BUILD_NUMBER}
                             fi
                             docker push ${regNamespace}/${artifactID}
                             """
